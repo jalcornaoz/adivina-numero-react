@@ -9,13 +9,13 @@ function App() {
   const [score, setScore] = useState(20);
   const [highscore, setHighscore] = useState(0);
   const [secretNumber, setSecretNumber] = useState(randomNumber());
-  const inputRef = useRef(null);
+  const inputRef = useRef(null); // se pasa el valor que tomamos de la caja de texto
 
   const handleCheck = () => {
     setNumber(Number(inputRef.current.value));
   };
 
-  useEffect(() => {
+  const compareNumber = () => {
     console.log(`El número secreto es ${secretNumber}`);
     console.log(`El número introducido es ${number}`);
     if (number === secretNumber) {
@@ -23,15 +23,18 @@ function App() {
       // mostrar número secreto -> HECHO
       // cambiar el color de fondo (verde)
       // si 'score' mayor que 'highscore', actualizar el highscore
-    } else if (number === 1) {
+    } else if (score === 1) {
       setScore(score - 1);
       // mensaje: has perdido -> HECHO
       // cambiar el color de fondo (rojo)
+    } else if (number === "") {
     } else {
       // mensaje: el número secreto es mayor o menor -> HECHO
       setScore(score - 1);
     }
-  }, [number]);
+  };
+
+  useEffect(compareNumber, [number]); //se ejecuta 'compareNumber' cuando cambia el valor 'number'
 
   return (
     <div>
